@@ -27,7 +27,7 @@ class InitYaml < Vagrant::Command::Base
       f.write(contents)
     end
 
-    @env.ui.info(I18n.t("vagrant.commands.init.success"),
+    @env.ui.info(I18n.t("vagrant.plugins.yaml.commands.init.success"),
                  :prefix => false)
 
     # Success, exit status 0
