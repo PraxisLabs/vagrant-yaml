@@ -1,1 +1,32 @@
-some yamls
+host_name: vagrant.local
+ip_address: '192.168.33.34'
+box: "<%= box_name %>"
+<% if box_url.nil? %># <% end %>box_url: "<%= box_url || "http://domain.com/path/to/above.box" %>"
+
+# Many configs are not yet supported. For a full list see:
+# http://docs.vagrantup.com/v1/docs/vagrantfile.html
+#config.nfs.map_uid
+#config.nfs.map_gid
+#config.package.name
+#config.ssh.username
+#config.ssh.host
+#config.ssh.port
+#config.ssh.guest_port
+#config.ssh.max_tries
+#config.ssh.timeout
+#config.ssh.private_key_path
+#config.ssh.forward_agent
+#config.ssh.forward_x11
+#config.ssh.shell
+#config.vagrant.dotfile_name
+#config.vagrant.host
+#config.vm.auto_port_range
+#config.vm.base_mac
+#config.vm.boot_mode
+#config.vm.customize
+#config.vm.define
+#config.vm.forward_port
+#config.vm.guest
+#config.vm.network
+#config.vm.provision
+#config.vm.share_folder
