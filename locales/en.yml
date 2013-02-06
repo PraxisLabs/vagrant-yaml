@@ -11,3 +11,8 @@ en:
               the Yaml files it finds in /vms-enabled. You are now ready to `vagrant up` your
               first virtual environment! Please read the comments in the default Yaml VM
               config file to see how it works.
+
+        errors:
+          vagrantfile_exists: |-
+            `Vagrantfile` already exists in this directory. Remove it before running `vagrant
+            yaml init`, or run `vagrant yaml update` to update to the latest version.

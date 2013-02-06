@@ -18,7 +18,7 @@ module VagrantYaml
         return if !argv
 
         save_path = @env.cwd.join("Vagrantfile")
-#    raise Errors::VagrantfileExistsError if save_path.exist?
+        raise Errors::VagrantfileExistsError if save_path.exist?
 
         template_path = ::Vagrant.source_root.join("templates/commands/init/Vagrantfile")
         contents = Vagrant::Util::TemplateRenderer.render(template_path,

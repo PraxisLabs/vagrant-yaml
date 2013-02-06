@@ -1,5 +1,5 @@
 require 'vagrant'
-#require 'vagrant-yaml/errors'
+require 'vagrant-yaml/errors'
 require 'vagrant-yaml/commands/yaml'
 require 'vagrant-yaml/commands/yaml_init'
 require 'vagrant-yaml/commands/yaml_update'
