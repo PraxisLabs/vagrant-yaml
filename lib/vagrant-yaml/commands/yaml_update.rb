@@ -3,14 +3,14 @@ require 'vagrant/util/template_renderer'
 require 'vagrant/command/base'
 
 module VagrantYaml
-  class Command < Vagrant::Command::Base
+  module Command
 
-    class YamlInit < VagrantYaml::Command
+    class YamlUpdate < Vagrant::Command::Base
       def execute
         options = {}
 
         opts = OptionParser.new do |opts|
-          opts.banner = "Usage: vagrant init-yaml [box-name] [box-url]"
+          opts.banner = "Usage: vagrant yaml update [box-name] [box-url]"
         end
 
         # Parse the options
