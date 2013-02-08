@@ -11,6 +11,14 @@ en:
               the Yaml files it finds in /vms-enabled. You are now ready to `vagrant up` your
               first virtual environment! Please read the comments in the default Yaml VM
               config file to see how it works.
+          update:
+            success: |-
+              Vagrantfile updated using the latesy one from vagrant-yaml.
+            confirmation: |-
+              This operation will overwrite the Vagrantfile in this project with the one in the
+              vagrant-yaml gem. Do you want to proceed?
+            will_not_update: |-
+              User aborted. Vagrantfile was not updated.
 
         errors:
           vagrantfile_exists: |-
