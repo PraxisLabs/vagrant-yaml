@@ -34,10 +34,10 @@ module VagrantYaml
         Dir.mkdir('vms-enabled')
 
         # Create default.yml
-        save_path = @env.cwd.join("vms-available/default.yml")
+        save_path = @env.cwd.join("vms-available/default.yaml")
         raise Errors::VagrantfileExistsError if save_path.exist?
 
-        template_path = ::VagrantYaml.source_root.join("templates/default.yml")
+        template_path = ::VagrantYaml.source_root.join("templates/default.yaml")
         contents = Vagrant::Util::TemplateRenderer.render(template_path,
                                                           :box_name => argv[0] || "base",
                                                           :box_url => argv[1])
@@ -46,7 +46,7 @@ module VagrantYaml
         end
 
         # Create symlink
-        File.symlink("../vms-available/default.yml", "vms-enabled/default.yml")
+        File.symlink("../vms-available/default.yaml", "vms-enabled/default.yaml")
 
         @env.ui.info(I18n.t("vagrant.plugins.yaml.commands.init.success"),
                      :prefix => false)

@@ -9,38 +9,38 @@ current_dir = File.dirname(__FILE__)
 # Scan our vms-enabled/ directory for YAML config files
 if File.directory?("#{current_dir}/vms-enabled/")
    Dir.chdir("#{current_dir}/vms-enabled/")
-   config_files = Dir.glob("*.yml")
+   config_files = Dir.glob("*.yaml")
 end
 
 # Build up a list of the VMs we'll provision, and their config_files
 vms = {}
 config_files.each do |config_file|
-  vms.update({ config_file.sub('.yml', '') => config_file})
+  vms.update({ config_file.sub('.yaml', '') => config_file})
 end
 
-## For additional available options, see: http://vagrantup.com/v1/docs/vagrantfile.html
 Vagrant::Config.run do |config|
-
   # VM-specific configuration loaded from YAML config files
   vms.each do |vm,config_file|
+
     yml = YAML.load_file "#{current_dir}/vms-enabled/#{config_file}"
 
+    def apply_settings(vm,yml)
+      yml.each do |key0,value0|
+        if !value0.is_a?(Hash)                           # If it's a setting,
+            vm.send("#{key0}=".to_sym, value0)           # we set it directly.
+        else                                               # Otherwise,
+          method_object = vm.method("#{key0}".to_sym)      # we're invoking a method
+          value0.each do |key1,value1|                     # and each setting
+            method_object.call("#{key1}".to_sym, value1)   # needs to be passed to the method.
+          end
+        end
+      end
+    end
+
     config.vm.define "#{vm}" do |vm_config|
-      vm_config.vm.box = yml['box']
-      vm_config.vm.box_url = yml['box_url']
-
-
-      vm_config.vm.host_name = yml['host_name']
-      vm_config.vm.network :hostonly, yml['ip_address']
-
-#      vm_config.vm.provision :puppet do |puppet|
-#        puppet.manifests_path = "manifests"
-#        puppet.manifest_file  = "site.pp"
-#        puppet.module_path  = "modules"
-#        # TODO: allow facts to be added dynamically from YAML files
-#        puppet.facter = { "fqdn" => $hostname }
-#      end
-
+      apply_settings(vm_config.vm, yml)
+      # We may need some project-wide config file to handle things like:
+      #vm_config.vbguest.auto_update = false
     end
 
   end
