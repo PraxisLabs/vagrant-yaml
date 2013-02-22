@@ -6,14 +6,15 @@ en:
           init:
             success: |-
               A `Vagrantfile` has been placed in this directory, a default Yaml VM config file
-              has been placed in /vms-available, and a symlink to it, placed in /vms-enabled.
-              Unlike a regular Vagrantfile, this one parses and applies the configuration in
-              the Yaml files it finds in /vms-enabled. You are now ready to `vagrant up` your
-              first virtual environment! Please read the comments in the default Yaml VM
-              config file to see how it works.
+              has been placed in vms-available/, and a symlink to it, placed in vms-enabled/.
+              Finally, a file to contain local overrides was placed in local.d/. Unlike a
+              regular Vagrantfile, this one parses and applies the configuration in the Yaml
+              files it finds in vms-enabled/. You are now ready to `vagrant up` your first
+              virtual environment! Please read the comments in the default Yaml VM config
+              file to see how it works.
           update:
             success: |-
-              Vagrantfile updated using the latesy one from vagrant-yaml.
+              Vagrantfile updated using the latest one from vagrant-yaml.
             confirmation: |-
               This operation will overwrite the Vagrantfile in this project with the one in the
               vagrant-yaml gem. Do you want to proceed?

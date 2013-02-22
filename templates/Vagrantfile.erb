@@ -24,6 +24,14 @@ Vagrant::Config.run do |config|
 
     yml = YAML.load_file "#{current_dir}/vms-enabled/#{config_file}"
 
+    # Allow local overrides
+    if File.exists?("#{current_dir}/local.d/#{config_file}")
+      local = YAML.load_file "#{current_dir}/local.d/#{config_file}"
+      if local.is_a?(Hash)
+        yml.merge!(local)
+      end
+    end
+
     def apply_settings(vm,yml)
       yml.each do |key0,value0|
         if !value0.is_a?(Hash)                           # If it's a setting,

@@ -4,19 +4,23 @@
 # allows you to have a library of config files that could, for example, be
 # updated by an external application.
 
-# To see what you can do with Yaml can do, check out this handy reference card:
+# Also, any Yaml config file in local.d/ named the same as one in vms-enabled/
+# will allow the selective override of individual configuration settings. See
+# local.d/default.yaml for an example.
+
+# To see what you can do with Yaml, check out this handy reference card:
 # http://www.yaml.org/refcard.html. To see how Yaml is interpreted in Ruby, see
 # this guide: http://yaml.org/YAML_for_ruby.html. For further details, refer to
 # the full Yaml specification: http://www.yaml.org/spec/1.2/spec.html
 
 # For all available Vagrant options, see the docs on Vagrantfile settings:
 # http://vagrantup.com/v1/docs/vagrantfile.html. While we've provided some
-# example below, it's far from exhaustive. If you can't figure out how to apply
-# a particular setting, please file a support request at:
+# examples below, it's far from exhaustive. If you can't figure out how to
+# apply a particular setting, please file a support request at:
 # https://github.com/ergonlogic/vagrant-yaml. Also, feel free to post to the
 # project's wiki, or submit pull requests.
 
-box: "<%= box_name %>"
+box: "<%= box_name || "base" %>"
 <% if box_url.nil? %># <% end %>box_url: "<%= box_url || "http://domain.com/path/to/above.box" %>"
 # host_name: &id001 vagrant.local
 # network:

@@ -19,7 +19,8 @@ module VagrantYaml
 
         create_vagrantfile
         create_directories
-        create_default_yml(argv[0], argv[1])
+        create_default_yaml(argv[0], argv[1])
+        create_local_default_yaml
         create_symlinks
 
         @env.ui.info(I18n.t("vagrant.plugins.yaml.commands.init.success"),
@@ -42,9 +43,10 @@ module VagrantYaml
       def create_directories
         Dir.mkdir('vms-available')
         Dir.mkdir('vms-enabled')
+        Dir.mkdir('local.d')
       end
 
-      def create_default_yml(box_name="base", box_url=nil)
+      def create_default_yaml(box_name=nil, box_url=nil)
         save_path = @env.cwd.join("vms-available/default.yaml")
         raise Errors::VagrantfileExistsError if save_path.exist?
 
@@ -52,6 +54,16 @@ module VagrantYaml
         contents = Vagrant::Util::TemplateRenderer.render(template_path,
                                                           :box_name => box_name,
                                                           :box_url => box_url)
+        save_path.open("w+") do |f|
+          f.write(contents)
+        end
+      end
+
+      def create_local_default_yaml
+        save_path = @env.cwd.join("local.d/default.yaml")
+        raise Errors::VagrantfileExistsError if save_path.exist?
+        template_path = ::VagrantYaml.source_root.join("templates/local.default.yaml")
+        contents = Vagrant::Util::TemplateRenderer.render(template_path)
         save_path.open("w+") do |f|
           f.write(contents)
         end
