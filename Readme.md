@@ -88,5 +88,5 @@ requests.
 CREDITS
 -------
 
-Developed and maintained by Christopher Gervais <http://ergonlogic.com/>
-
+Developed and maintained by Praxis Labs Coop <http://praxis.coop/>
+Sponsored by Poetic Systems <http://poeticsystems.com/>
