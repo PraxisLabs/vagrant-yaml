@@ -1,9 +1,7 @@
 Vagrant-Yaml
 ============
 
-<div style="float: right">
 [![Build Status](https://travis-ci.org/PraxisLabs/vagrant-yaml.svg?branch=master)](https://travis-ci.org/PraxisLabs/vagrant-yaml)
-</div>
 
 Installation
 ------------
