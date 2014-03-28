@@ -7,7 +7,7 @@ Installation
 To install this gem, use the Vagrant 'gem' command:
 
 ```
-vagrant gem install vagrant-yaml
+vagrant plugin install vagrant-yaml
 ```
 
 This will keep it isolated from system-wide and other gems.
@@ -89,4 +89,5 @@ CREDITS
 -------
 
 Developed and maintained by Praxis Labs Coop <http://praxis.coop/>
+
 Sponsored by Poetic Systems <http://poeticsystems.com/>
