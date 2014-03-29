@@ -1,12 +1,13 @@
 Vagrant-Yaml
 ============
 
-[![Build Status](https://travis-ci.org/PraxisLabs/vagrant-yaml.svg?branch=master)](https://travis-ci.org/PraxisLabs/vagrant-yaml) [![Gem Version](https://badge.fury.io/rb/vagrant-yaml.png)](http://badge.fury.io/rb/vagrant-yaml) [![Coverage Status](https://coveralls.io/repos/PraxisLabs/vagrant-yaml/badge.png)](https://coveralls.io/r/PraxisLabs/vagrant-yaml)
+[![Build Status](https://travis-ci.org/PraxisLabs/vagrant-yaml.svg?branch=master)](https://travis-ci.org/PraxisLabs/vagrant-yaml) [![Coverage Status](https://coveralls.io/repos/PraxisLabs/vagrant-yaml/badge.png)](https://coveralls.io/r/PraxisLabs/vagrant-yaml) [![Dependency Status](https://gemnasium.com/PraxisLabs/vagrant-yaml.png)](https://gemnasium.com/PraxisLabs/vagrant-yaml) [![Gem Version](https://badge.fury.io/rb/vagrant-yaml.png)](http://badge.fury.io/rb/vagrant-yaml)
+
 
 Installation
 ------------
 
-To install this gem, use the Vagrant 'gem' command:
+To install this gem, use the Vagrant 'plugin' command:
 
 ```
 vagrant plugin install vagrant-yaml
