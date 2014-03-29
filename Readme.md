@@ -1,7 +1,7 @@
 Vagrant-Yaml
 ============
 
-[![Build Status](https://travis-ci.org/PraxisLabs/vagrant-yaml.svg?branch=master)](https://travis-ci.org/PraxisLabs/vagrant-yaml)
+[![Build Status](https://travis-ci.org/PraxisLabs/vagrant-yaml.svg?branch=master)](https://travis-ci.org/PraxisLabs/vagrant-yaml) [![Gem Version](https://badge.fury.io/rb/vagrant-yaml.png)](http://badge.fury.io/rb/vagrant-yaml) [![Coverage Status](https://coveralls.io/repos/PraxisLabs/vagrant-yaml/badge.png)](https://coveralls.io/r/PraxisLabs/vagrant-yaml)
 
 Installation
 ------------
