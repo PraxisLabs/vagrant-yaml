@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0.0'
   s.required_rubygems_version = ">= 1.3.6"
 
+  s.add_dependency "deep_merge"
+
   s.add_development_dependency "cucumber"
   s.add_development_dependency "aruba"
   s.add_development_dependency "rake"

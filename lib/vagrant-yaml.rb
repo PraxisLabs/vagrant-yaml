@@ -31,38 +31,66 @@ module VagrantYaml
     end
   end
 
+  # Merge hashes recursively
+  def self.deep_merge!(first, second)
+    second.each_pair do |k,v|
+      if first[k].is_a?(Hash) and second[k].is_a?(Hash)
+        deep_merge!(first[k], second[k])
+      else
+        first[k] = second[k]
+      end
+    end
+  end
+
   def self.up!(config)
 
     require "yaml"
 
+    # Set defaults
+    local_dir = "local.d"
+    enabled_dir = "enabled.d"
+    # Override defaults with config, if it's set, since config finalizing
+    # occurs too late for our purposes.
+    if config.yaml.conf_dirs.is_a?(Hash)
+      if config.yaml.conf_dirs.has_key?('local')
+        local_dir = config.yaml.conf_dirs['local']
+      end
+      if config.yaml.conf_dirs.has_key?('enabled')
+        enabled_dir = config.yaml.conf_dirs['enabled']
+      end
+    end
+
     # All paths are relative to the project root
     # todo: Can we access this from Vagrant::Environment?
     current_dir = Dir.pwd
+    local_dir = "#{current_dir}/#{local_dir}"
+    enabled_dir = "#{current_dir}/#{enabled_dir}"
 
     # Scan our vms-enabled/ directory for YAML config files
-    if File.directory?("#{current_dir}/vms-enabled/")
-       Dir.chdir("#{current_dir}/vms-enabled/")
-       config_files = Dir.glob("*.yaml")
+    if File.directory?(enabled_dir)
+      config_files = Dir.glob("#{enabled_dir}/*.yaml")
+    else
+      raise Errors::EnabledDirMissing,
+        :enabled_dir => enabled_dir
     end
 
     # Build up a list of the VMs we'll provision, and their config_files
     vms = {}
     config_files.each do |config_file|
-      vms.update({ config_file.sub('.yaml', '') => config_file})
+      vms.update({ File.basename(config_file, ".yaml") => config_file})
     end
 
     # VM-specific configuration loaded from YAML config files
     vms.each do |vm,config_file|
 
-      yml = YAML.load_file "#{current_dir}/vms-enabled/#{config_file}"
+      yml = YAML.load_file config_file
+      yml = {} if !yml.is_a?(Hash)
 
       # Allow local overrides
-      local_file = "#{current_dir}/local.d/#{config_file}"
+      local_file = "#{local_dir}/#{vm}.yaml"
       if File.exists?(local_file)
         local = YAML.load_file local_file
-        if local.is_a?(Hash)
-          yml.merge!(local)
-        end
+        deep_merge!(yml, local) if local.is_a?(Hash)
       end
 
       config.vm.define "#{vm}" do |vm_config|

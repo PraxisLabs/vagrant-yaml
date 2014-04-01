@@ -23,11 +23,15 @@ module VagrantPlugins
           create_vagrantfile
           create_directories
           create_default_yaml(argv[0], argv[1])
-          create_local_default_yaml
-          create_symlinks
+          create_vm_yaml('vm1')
+          create_vm_yaml('vm2')
 
-          @env.ui.info(I18n.t("vagrant.plugins.yaml.commands.init.success"),
-                       :prefix => false)
+          @env.ui.info(I18n.t(
+            "vagrant.plugins.yaml.commands.init.success",
+              avail_dir: 'available.d',
+              enabled_dir: 'enabled.d',
+              local_dir: 'local.d'
+            ), :prefix => false)
           # Success, exit status 0
           0
         end
@@ -44,13 +48,13 @@ module VagrantPlugins
         end
 
         def create_directories
-          Dir.mkdir('vms-available')
-          Dir.mkdir('vms-enabled')
+          Dir.mkdir('available.d')
+          Dir.mkdir('enabled.d')
           Dir.mkdir('local.d')
         end
 
         def create_default_yaml(box_name=nil, box_url=nil)
-          save_path = @env.cwd.join("vms-available/default.yaml")
+          save_path = @env.cwd.join("available.d/default.yaml")
           raise Errors::VagrantfileExistsError if save_path.exist?
 
           template_path = ::VagrantYaml.source_root.join("templates/default.yaml")
@@ -62,18 +66,16 @@ module VagrantPlugins
           end
         end
 
-        def create_local_default_yaml
-          save_path = @env.cwd.join("local.d/default.yaml")
+        def create_vm_yaml(vm_name)
+          File.symlink("../available.d/default.yaml", "enabled.d/" + vm_name + ".yaml")
+          save_path = @env.cwd.join("local.d/" + vm_name + ".yaml")
           raise Errors::VagrantfileExistsError if save_path.exist?
-          template_path = ::VagrantYaml.source_root.join("templates/local.default.yaml")
-          contents = Vagrant::Util::TemplateRenderer.render(template_path)
+          template_path = ::VagrantYaml.source_root.join("templates/local.yaml")
+          contents = Vagrant::Util::TemplateRenderer.render(template_path,
+                                                            :host_name => vm_name + ".example.com")
           save_path.open("w+") do |f|
             f.write(contents)
           end
-        end
-
-        def create_symlinks
-          File.symlink("../vms-available/default.yaml", "vms-enabled/default.yaml")
         end
 
       end

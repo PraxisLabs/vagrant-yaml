@@ -6,6 +6,11 @@ module VagrantPlugins
       This plugin enables Vagrant to use YAML files to configure VMs.
       DESC
 
+      config("yaml") do
+        require_relative "config/yaml"
+        Config::Yaml
+      end
+
       command("yaml") do
         require_relative "command/yaml"
         Command::Yaml

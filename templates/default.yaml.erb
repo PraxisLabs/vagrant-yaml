@@ -1,12 +1,12 @@
 # All Vagrant VM configuration can be done from Yaml config files such as this
-# one. Only config files in the 'vms-enabled' directory are interpreted. You
-# can copy from, or symlink to, files in the 'vms-available' directory. This
+# one. Only config files in the 'enabled.d' directory are interpreted. You
+# can copy from, or symlink to, files in the 'available.d' directory. This
 # allows you to have a library of config files that could, for example, be
 # updated by an external application.
 
-# Also, any Yaml config file in local.d/ named the same as one in vms-enabled/
+# Also, any Yaml config file in local.d/ named the same as one in enabled.d/
 # will allow the selective override of individual configuration settings. See
-# local.d/default.yaml for an example.
+# local.d/vm1.yaml for an example.
 
 # To see what you can do with Yaml, check out this handy reference card:
 # http://www.yaml.org/refcard.html. To see how Yaml is interpreted in Ruby, see
@@ -14,24 +14,26 @@
 # the full Yaml specification: http://www.yaml.org/spec/1.2/spec.html
 
 # For all available Vagrant options, see the docs on Vagrantfile settings:
-# http://vagrantup.com/v1/docs/vagrantfile.html. While we've provided some
+# http://vagrantup.com/v2/docs/vagrantfile.html. While we've provided some
 # examples below, it's far from exhaustive. If you can't figure out how to
 # apply a particular setting, please file a support request at:
-# https://github.com/ergonlogic/vagrant-yaml. Also, feel free to post to the
+# https://github.com/PraxisLabs/vagrant-yaml. Also, feel free to post to the
 # project's wiki, or submit pull requests.
 
 box: "<%= box_name || "base" %>"
 <% if box_url.nil? %># <% end %>box_url: "<%= box_url || "http://domain.com/path/to/above.box" %>"
-# host_name: &id001 vagrant.local
-# network:
-#   hostonly: '192.168.33.34'
-# provision:
-#   puppet:
-#     module_path: 'modules'
-#     manifests_path: 'manifests'
-#     manifest_file: site.pp
-#     options:
-#       - --verbose
-#       - --debug
-#     facter:
-#       fqdn: *id001
+hostname: &id001 vagrant.local
+#network:
+#  forwarded_port:
+#    :guest: 80
+#    :host:  8080
+#provision:
+#  puppet:
+#    :module_path: 'modules'
+#    :manifests_path: 'manifests'
+#    :manifest_file: site.pp
+#    :options:
+#      - --verbose
+#      - --debug
+#    :facter:
+#      fqdn: *id001

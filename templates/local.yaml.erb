@@ -1,6 +1,6 @@
-# Any Yaml config file in local.d/ named the same as one in vms-enabled/ will
+# Any Yaml config file in 'local.d/' named the same as one in 'enabled.d/' will
 # allow the selective override of individual configuration settings. Uncommen-
 # ting the setting below would override the 'host_name' set by Vagrant in the
 # VM.
 
-# host_name: something.else
+hostname: <%= host_name %>

@@ -8,20 +8,21 @@ Feature: Init command
     Given a directory named "test"
     And I cd to "test"
     When I successfully run `vagrant yaml init`
-    Then the following files should exist:
-      | Vagrantfile |
-      | vms-available/default.yaml |
-      | vms-enabled/default.yaml |
-      | local.d/default.yaml |
-    And the following directories should exist:
+    Then the following directories should exist:
       | local.d |
-      | vms-available |
-      | vms-enabled |
+      | available.d |
+      | enabled.d |
+    And the following files should exist:
+      | Vagrantfile |
+      | available.d/default.yaml |
+      | enabled.d/vm1.yaml |
+      | enabled.d/vm2.yaml |
+      | local.d/vm1.yaml |
+      | local.d/vm2.yaml |
     And the output should contain "A `Vagrantfile` has been placed in this directory, a default Yaml VM config file"
-    And the output should contain "has been placed in vms-available/, and a symlink to it, placed in vms-enabled/."
-    And the output should contain "Finally, a file to contain local overrides was placed in local.d/. Unlike a"
+    And the output should contain "has been placed in 'available.d', and a symlink to it, placed in 'enabled.d'."
+    And the output should contain "Finally, a file to contain local overrides was placed in 'local.d'. Unlike a"
     And the output should contain "regular Vagrantfile, this one parses and applies the configuration in the Yaml"
-    And the output should contain "files it finds in vms-enabled/. You are now ready to `vagrant up` your first"
+    And the output should contain "files it finds in 'enabled.d'. You are now ready to `vagrant up` your first"
     And the output should contain "virtual environment! Please read the comments in the default Yaml VM config"
     And the output should contain "file to see how it works."
-

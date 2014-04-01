@@ -9,5 +9,9 @@ module VagrantYaml
       error_key :vagrantfile_exists
     end
 
+    class EnabledDirMissing < YamlError
+      error_key :enabled_dir_missing
+    end
+
   end
 end

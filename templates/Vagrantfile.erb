@@ -5,5 +5,11 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # Specify the directories in which to look for YAML VM config files.
+  #config.yaml.conf_dirs = { 'local' => 'local.d', 'enabled' => 'enabled.d' }
+
+  # Load YAML VM configs.
   VagrantYaml::up!(config)
+
 end

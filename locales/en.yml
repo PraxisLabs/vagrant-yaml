@@ -6,10 +6,10 @@ en:
           init:
             success: |-
               A `Vagrantfile` has been placed in this directory, a default Yaml VM config file
-              has been placed in vms-available/, and a symlink to it, placed in vms-enabled/.
-              Finally, a file to contain local overrides was placed in local.d/. Unlike a
+              has been placed in '%{avail_dir}', and a symlink to it, placed in '%{enabled_dir}'.
+              Finally, a file to contain local overrides was placed in '%{local_dir}'. Unlike a
               regular Vagrantfile, this one parses and applies the configuration in the Yaml
-              files it finds in vms-enabled/. You are now ready to `vagrant up` your first
+              files it finds in '%{enabled_dir}'. You are now ready to `vagrant up` your first
               virtual environment! Please read the comments in the default Yaml VM config
               file to see how it works.
           update:
@@ -25,3 +25,8 @@ en:
           vagrantfile_exists: |-
             `Vagrantfile` already exists in this directory. Remove it before running `vagrant
             yaml init`, or run `vagrant yaml update` to update to the latest version.
+          enabled_dir_missing: |-
+            A valid directory must be specified where YAML configs for the VMs can be found.
+            Current config points to a non-existent directory:
+            >>> %{enabled_dir}
+
