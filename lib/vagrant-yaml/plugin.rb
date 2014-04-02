@@ -1,3 +1,5 @@
+require 'vagrant-yaml/vagrant-yaml'
+
 module VagrantPlugins
   module VagrantYaml
     class Plugin < Vagrant.plugin("2")
